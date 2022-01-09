@@ -78,6 +78,21 @@ class Profile(models.Model):
     def __str__(self):
         return self.name
 
+class BlogPost(models.Model):
+    title = models.CharField(max_length=150)
+    image = models.ImageField(upload_to='post/')
+    post = HTMLField()
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    post_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    @classmethod
+    def search_blogpost(cls, search_term):
+        blogs = cls.objects.filter(Q (username__username=search_term) | Q (neighbourhood__neighbourhood=search_term) | Q (title__icontains=search_term))
+        return blogs
     
 class Business(models.Model):
     logo = models.ImageField(upload_to='businesslogo/')
