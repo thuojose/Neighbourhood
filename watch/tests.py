@@ -52,3 +52,29 @@ class healthservicesTestClass(TestCase):
         self.optical.delete_healthservices('optical')
         health = healthservices.objects.all()
         self.assertTrue(len(health) == 0)
+        
+class ProfileTestClass(TestCase):
+    '''
+    Test case for the Profile class and it's behaviours
+    '''
+    def setUp(self):
+        '''
+        Method that will run before any test case under this class
+        '''
+        self.new_user = User(username = "joe", email = "joe@gmail.com", password = "joefes12345",)
+        self.new_user.save()
+
+        self.new_neigh = Neighbourhood(neighbourhood_name = "ngong")
+        self.new_neigh.save()
+
+        self.new_profile = Profile(username = self.new_user, neighbourhood = self.new_neigh, name = "joe kim", email = "joe@gmail.com", bio = "doing research")
+
+    def test_instance(self):
+        '''
+        Test to confirm that the object is being instantiated correctly
+        '''
+        self.assertTrue(isinstance(self.new_profile, Profile))
+
+    def tearDown(self):
+        Profile.objects.all().delete()
+
