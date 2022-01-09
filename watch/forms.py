@@ -1,5 +1,5 @@
 from django import forms
-from .models import notifications
+from .models import notifications, Business,BlogPost, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -32,3 +32,8 @@ class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         exclude = ['owner', 'neighbourhood']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        exclude = ['username', 'post']
