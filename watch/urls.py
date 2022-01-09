@@ -11,7 +11,8 @@ app_name = "watch"
 urlpatterns = [
     path('', views.index, name = 'Index'),
     path("register", views.register, name="register"),
-    
+     path('notifications', views.notification, name='notifications'),
+     
     ]
 
 if settings.DEBUG:
