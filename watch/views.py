@@ -5,7 +5,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Neighbourhood,notifications
+from .models import Neighbourhood,notifications,healthservices
 from .forms import NewUserForm,notificationsForm
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -50,5 +50,13 @@ def blog(request):
     blogposts = BlogPost.objects.filter(neighbourhood=profile.neighbourhood)
 
     return render(request, 'blog.html', {"blogposts":blogposts})
+
+@login_required(login_url='/accounts/login/')
+def health(request):
+    current_user = request.user
+    profile = Profile.objects.get(username=current_user)
+    healthservices = Health.objects.filter(neighbourhood=profile.neighbourhood)
+
+    return render(request, 'health.html', {"healthservices":healthservices})
 
 
