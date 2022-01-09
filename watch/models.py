@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 from django.db.models import Q
+import datetime as dt
 
 Priority=(
     ('Informational', 'Informational'),
@@ -42,3 +43,16 @@ class notifications(models.Model):
 
     def __str__(self):
         return self.title
+
+class healthservices(models.Model):
+    healthservices = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.healthservices
+
+    def save_healthservices(self):
+        self.save()
+
+    @classmethod
+    def delete_healthservices(cls, healthservices):
+        cls.objects.filter(healthservices=healthservices).delete()
