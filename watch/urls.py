@@ -24,7 +24,7 @@ urlpatterns = [
     path('new/blogpost', views.new_blogpost, name='new-blogpost'),
     path('new/business', views.new_business, name='new-business'),
     path('new/notification', views.new_notification, name = 'new-notification'),
-       
+    path('search/', views.search_results, name = 'search_results'),   
     ]
 
 if settings.DEBUG:
