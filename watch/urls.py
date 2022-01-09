@@ -14,6 +14,7 @@ urlpatterns = [
     path('notifications', views.notification, name='notifications'),
     path('blog', views.blog, name='blog'),
     path('health', views.health, name='health'),
+    path('authorities', views.authorities, name='authorities'),
     ]
 
 if settings.DEBUG:
