@@ -5,8 +5,8 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Neighbourhood,notifications,healthservices,Authorities
-from .forms import NewUserForm,notificationsForm
+from .models import Neighbourhood,notifications,healthservices,Authorities,Business
+from .forms import NewUserForm,notificationsForm,BusinessForm
 from django.db.models import Q
 from django.contrib.auth.models import User
 import datetime as datetime
@@ -67,4 +67,11 @@ def authorities(request):
 
     return render(request, 'authorities.html', {"authorities":authorities})
 
+@login_required(login_url='/accounts/login/')
+def businesses(request):
+    current_user = request.user
+    profile = Profile.objects.get(username = current_user)
+    businesses = Business.objects.filter(neighbourhood=profile.neighbourhood)
+
+    return render(request, 'businesses.html', {"businesses":businesses})
 
