@@ -18,4 +18,10 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
+    path('', include('watch.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path("login", views.login_request, name="login"),
+    path('logout/', views.logout, {"next_page": '/'}),
 ]
