@@ -32,3 +32,23 @@ class NeighbourhoodTestClass(TestCase):
         self.ngong.create_neighbourhood()
         edited_hood = Neighbourhood.update_neighbourhood("karen")
         self.assertEqual(self.ngong, edited_hood)
+
+class healthservicesTestClass(TestCase):
+    def setUp(self):
+        self.optical = healthservices(healthservices = 'optical')
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.optical, healthservices))
+
+    def tearDown(self):
+        healthservices.objects.all().delete()
+
+    def test_save_method(self):
+        self.optical.save_healthservices()
+        health = healthservices.objects.all()
+        self.assertTrue(len(health) > 0)
+
+    def test_delete_method(self):
+        self.optical.delete_healthservices('optical')
+        health = healthservices.objects.all()
+        self.assertTrue(len(health) == 0)
