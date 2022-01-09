@@ -13,7 +13,7 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path('notifications', views.notification, name='notifications'),
     path('blog', views.blog, name='blog'),
-    
+    path('health', views.health, name='health'),
     ]
 
 if settings.DEBUG:
