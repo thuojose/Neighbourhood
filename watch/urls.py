@@ -17,7 +17,8 @@ urlpatterns = [
     path('authorities', views.authorities, name='authorities'),
     path('businesses', views.businesses, name='businesses'),
     path('view/blog/', views.view_blog, name='view_blog'),
-    
+    path('my-profile/', views.my_profile, name='my-profile'),
+    path('user/<str:username>', views.user_profile, name = 'user-profile'),
     
     ]
 
