@@ -5,10 +5,11 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from .models import notifications
+from .models import Neighbourhood,notifications
 from .forms import NewUserForm,notificationsForm
 from django.db.models import Q
 from django.contrib.auth.models import User
+import datetime as datetime
 
 # Create your views here.
 def register(request):
@@ -41,4 +42,13 @@ def notification(request):
     all_notifications = notifications.objects.filter(neighbourhood=profile.neighbourhood)
 
     return render(request, 'notifications.html', {"notifications":all_notifications})
+
+@login_required(login_url='/accounts/login/')
+def blog(request):
+    current_user=request.user
+    profile = Profile.objects.get(username=current_user)
+    blogposts = BlogPost.objects.filter(neighbourhood=profile.neighbourhood)
+
+    return render(request, 'blog.html', {"blogposts":blogposts})
+
 
